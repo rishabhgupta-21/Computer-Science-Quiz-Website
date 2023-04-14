@@ -7,7 +7,8 @@ const questions = [
             { prompt: 'Memory', correct: false },
             { prompt: 'CPU', correct: true },
             { prompt: 'Control Unit', correct: false }
-        ]
+        ],
+        selected: [false, -1]
     },
 
     {
@@ -17,7 +18,8 @@ const questions = [
             { prompt: 'Element of Digital Image', correct: true },
             { prompt: 'Cluster of Analog Image', correct: false },
             { prompt: 'Cluster of Digital Image', correct: false }
-        ]
+        ],
+        selected: [false, -1]
     },
 
     {
@@ -27,7 +29,8 @@ const questions = [
             { prompt: 'Interpreter', correct: false },
             { prompt: 'Assembler', correct: true },
             { prompt: 'Comparator', correct: false }
-        ]
+        ],
+        selected: [false, -1]
     },
 
     {
@@ -37,7 +40,8 @@ const questions = [
             { prompt: 'Interactive Computer', correct: true },
             { prompt: 'Batch Processing', correct: false },
             { prompt: 'Time Sharing', correct: false }
-        ]
+        ],
+        selected: [false, -1]
     },
 
     {
@@ -47,7 +51,8 @@ const questions = [
             { prompt: 'All Purpose Scientific Code for Information Interchange', correct: false },
             { prompt: 'American Security Code for Information Interchange', correct: false },
             { prompt: 'American Scientific Code for Information Interchange', correct: false }
-        ]
+        ],
+        selected: [false, -1]
     },
 
     {
@@ -57,7 +62,8 @@ const questions = [
             { prompt: 'James D. Foley', correct: false },
             { prompt: 'Douglas Engelbart', correct: false },
             { prompt: 'James Gosling', correct: true }
-        ]
+        ],
+        selected: [false, -1]
     },
 
     {
@@ -67,7 +73,8 @@ const questions = [
             { prompt: 'Swapping', correct: true },
             { prompt: 'Spooling', correct: false },
             { prompt: 'Catching', correct: false }
-        ]
+        ],
+        selected: [false, -1]
     },
 
     {
@@ -77,7 +84,8 @@ const questions = [
             { prompt: '7', correct: false },
             { prompt: '2', correct: false },
             { prompt: '4', correct: true }
-        ]
+        ],
+        selected: [false, -1]
     },
 
     {
@@ -87,7 +95,8 @@ const questions = [
             { prompt: 'WWW', correct: false },
             { prompt: 'Facebook', correct: true },
             { prompt: 'Netscape Navigator', correct: false }
-        ]
+        ],
+        selected: [false, -1]
     },
 
     {
@@ -97,7 +106,8 @@ const questions = [
             { prompt: 'Spyware', correct: false },
             { prompt: 'Cookie', correct: true },
             { prompt: 'Malware', correct: false }
-        ]
+        ],
+        selected: [false, -1]
     }
 ];
 
@@ -111,7 +121,6 @@ let currentQuestionIndex = 0;
 let score = 0;
 
 // Functions that make up the Flow Logic
-
 function startQuiz() {
     // Reset both to Zero
     currentQuestionIndex = 0;
@@ -135,15 +144,53 @@ function showQuestion() {
 
     // Option Buttons
     for (let optionIndex = 0; optionIndex < currentQuestion.options.length; optionIndex++) {
+
         // Used for the below query to select the correct Option Button
         let optionNumber = optionIndex + 1;
 
         // Displaying each Option
-        const optionButton = document.querySelector(`#answer-buttons button:nth-child(${optionNumber})`);
+        const optionButton = document.querySelector(`#answer-buttons .btn:nth-child(${optionNumber})`);
         optionButton.innerText = currentQuestion.options[optionIndex].prompt;
+
+        // Click Functionality on Option Buttons
+        optionButton.addEventListener('click', function (e) {
+            // Option Buttons
+            // this.classList.toggle('clicked');
+
+            // If no option is selected when we click
+            if (currentQuestion.selected[0] === false && currentQuestion.selected[1] === -1) {
+                optionButton.classList.add('clicked');
+                currentQuestion.selected = [true, optionIndex];
+            }
+
+            // If this same option is selected when we click
+            else if (currentQuestion.selected[0] === true && currentQuestion.selected[1] === optionIndex) {
+                optionButton.classList.remove('clicked');
+                currentQuestion.selected = [false, -1];
+            }
+
+            // If another option is selected when we click
+            else if (currentQuestion.selected[0] === true && currentQuestion.selected[1] !== optionIndex) {
+                // Create an element for the currently selected option
+                let selectedOptionNumber = currentQuestion.selected[1] + 1;
+                const selectedOption = document.querySelector(`#answer-buttons .btn:nth-child(${selectedOptionNumber})`);
+
+                // .clicked Effect
+                selectedOption.classList.remove('clicked');
+                optionButton.classList.add('clicked');
+
+                // update the 'selected' array
+                currentQuestion.selected = [true, optionIndex];
+            }
+
+            // Next Button Logic
+            if (currentQuestion.selected[0] === true)
+                nextButton.classList.remove('hide');
+            else
+                nextButton.classList.add('hide');
+        });
     }
 }
-
 
 // CALLING
 startQuiz();

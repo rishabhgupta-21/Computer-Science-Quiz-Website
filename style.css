@@ -82,6 +82,9 @@ body {
     cursor: pointer;
 
     transition: transform 0.2s;
+
+    /* Button will be Hidden till user chooses an option! */
+    /* display: none; */
 }
 
 #next-button button:hover {
@@ -93,4 +96,16 @@ body {
 
 .hide {
     display: none;
+}
+
+
+.clicked {
+    background-color: #284b63;
+    color: white;
+    border: 3px solid black;
+    font-weight: 700;
+}
+
+.btn.clicked:hover {
+    background-color: #284b63;
 }
