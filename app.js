@@ -120,7 +120,9 @@ const nextButton = document.querySelector('#next-button button');
 let currentQuestionIndex = 0;
 let score = 0;
 
-// Functions that make up the Flow Logic
+
+// Function to Start the Quiz
+
 function startQuiz() {
     // Reset both to Zero
     currentQuestionIndex = 0;
@@ -130,6 +132,9 @@ function startQuiz() {
 
     showQuestion();
 }
+
+
+// Function that displays the question, options, implements click functionality for options, and provides logic for appearance and disappearance of the Next Button
 
 function showQuestion() {
     // Hiding the Next Button every time a new question appears
@@ -155,7 +160,6 @@ function showQuestion() {
         // Click Functionality on Option Buttons
         optionButton.addEventListener('click', function (e) {
             // Option Buttons
-            // this.classList.toggle('clicked');
 
             // If no option is selected when we click
             if (currentQuestion.selected[0] === false && currentQuestion.selected[1] === -1) {
@@ -191,6 +195,41 @@ function showQuestion() {
         });
     }
 }
+
+
+// Function that implements Click Functionality for the Next Button
+
+nextButton.addEventListener('click', function () {
+    let currentQuestion = questions[currentQuestionIndex];
+
+    // Check if answer was correct
+    let chosenOptionIndex = currentQuestion.selected[1];
+    if (currentQuestion.options[chosenOptionIndex].correct)
+        score++;
+
+    // Remove '.clicked' from selected Option
+    let chosenOptionNumber = chosenOptionIndex + 1;
+    const chosenOption = document.querySelector(`#answer-buttons .btn:nth-child(${chosenOptionNumber})`);
+
+    chosenOption.classList.remove('clicked');
+
+    // increment currentQuestionIndex
+    currentQuestionIndex++;
+
+    // Show Next Question or End Quiz
+    if (currentQuestionIndex === questions.length)
+        endQuiz();
+    else
+        showQuestion();
+});
+
+
+// Function to display stuff after all questions have been answered
+
+function endQuiz() {
+
+}
+
 
 // CALLING
 startQuiz();
