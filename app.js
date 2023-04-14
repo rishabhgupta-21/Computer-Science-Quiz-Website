@@ -113,8 +113,9 @@ const questions = [
 
 // Element objects
 const question = document.querySelector('#question');
-const answerButtons = document.querySelector('#answer-buttons');
+const optionsContainer = document.querySelector('#answer-buttons');
 const nextButton = document.querySelector('#next-button button');
+const replayButton = document.querySelector('#replay-button button');
 
 // Variables
 let currentQuestionIndex = 0;
@@ -128,7 +129,12 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
 
-    nextButton.innerText = 'Next';  // as we change it to 'Replay' when the quiz ends
+    replayButton.classList.add('hide');
+
+    // Undoing the things we did in endQuiz Function.
+    question.innerText = 'Question goes here!';
+    optionsContainer.classList.remove('hide');
+    question.classList.remove('scoring');
 
     showQuestion();
 }
@@ -227,9 +233,21 @@ nextButton.addEventListener('click', function () {
 // Function to display stuff after all questions have been answered
 
 function endQuiz() {
+    question.innerText = `You scored ${score}/10.`
 
+    question.classList.add('scoring');
+
+    optionsContainer.classList.add('hide');
+    nextButton.classList.add('hide');
+    replayButton.classList.remove('hide');
 }
 
 
-// CALLING
+// Function that implements Click Functionality for the Replay Button
+replayButton.addEventListener('click', function (e) {
+    location.reload();
+})
+
+
+// Function Call
 startQuiz();

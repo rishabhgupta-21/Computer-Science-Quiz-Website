@@ -23,6 +23,7 @@ body {
     font-size: 3rem;
     color: #003459;
     font-weight: 700;
+    text-align: center;
 
     border-bottom: 2px solid #577590;
     padding-bottom: 2rem;
@@ -33,7 +34,7 @@ body {
     padding-top: 1rem;
 }
 
-#question {
+.question {
     font-size: 2rem;
     color: #003459;
     font-weight: 600;
@@ -63,12 +64,13 @@ body {
     color: white;
 }
 
-#next-button {
+.next-button {
     display: flex;
     justify-content: flex-end;
 }
 
-#next-button button {
+.next-button button,
+.replay-button button {
     background-color: #001d3d;
     color: white;
     font-size: 1rem;
@@ -82,15 +84,22 @@ body {
     cursor: pointer;
 
     transition: transform 0.2s;
-
-    /* Button will be Hidden till user chooses an option! */
-    /* display: none; */
 }
 
-#next-button button:hover {
+.next-button button:hover,
+.replay-button button:hover {
     transform: scale(1.05) translateX(1.25%) translateY(-1.25%);
 }
 
+
+.replay-button {
+    display: flex;
+    justify-content: center;
+}
+
+.replay-button button {
+    font-size: 1.75rem;
+}
 
 /* JS Classes */
 
@@ -108,4 +117,11 @@ body {
 
 .btn.clicked:hover {
     background-color: #284b63;
+}
+
+
+.scoring {
+    font-size: 2.75rem;
+    text-align: center;
+    margin: 1.5rem 0;
 }
