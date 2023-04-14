@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #001d3d;
+}
+
+
+.app {
+    background-color: #e9ecef;
+    width: 90%;
+    max-width: 800px;
+    padding: 3rem 4rem 2rem;
+    margin: 6rem auto 0;
+    border-radius: 10px;
+}
+
+.app h1 {
+    font-size: 3rem;
+    color: #003459;
+    font-weight: 700;
+
+    border-bottom: 2px solid #577590;
+    padding-bottom: 2rem;
+}
+
+
+.quiz {
+    padding-top: 1rem;
+}
+
+#question {
+    font-size: 2rem;
+    color: #003459;
+    font-weight: 600;
+}
+
+.btn {
+    color: #495057;
+    background-color: white;
+    font-weight: 100;
+    font-size: 0.95rem;
+    border: 2px solid #adb5bd;
+    border-radius: 0.25em;
+
+    width: 100%;
+    text-align: left;
+    display: block;
+    margin: 1rem 0;
+    padding: 0.75rem;
+
+    cursor: pointer;
+
+    transition: background-color 0.1s, color 0.1s;
+}
+
+.btn:hover {
+    background-color: #8d99ae;
+    color: white;
+}
+
+#next-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#next-button button {
+    background-color: #001d3d;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 1px solid black;
+    border-radius: 0.25em;
+
+    padding: 0.4rem 2rem;
+    margin-top: 0.5rem;
+
+    cursor: pointer;
+
+    transition: transform 0.2s;
+
+    /* Button will be Hidden till user chooses an option! */
+    /* display: none; */
+}
+
+#next-button button:hover {
+    transform: scale(1.05) translateX(1.25%) translateY(-1.25%);
+}
+
+
+/* JS Classes */
+
+.hide {
+    display: none;
+}
+
+
+.clicked {
+    background-color: #284b63;
+    color: white;
+    border: 3px solid black;
+    font-weight: 700;
+}
+
+.btn.clicked:hover {
+    background-color: #284b63;
+}
